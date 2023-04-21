@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
-    
+
   end
 
   def index
@@ -35,16 +35,12 @@ class UsersController < ApplicationController
     @users = user.followers
   end
 
-  def search
+  def searches
     @user = User.find(params[:user_id])
     @books = @user.books
     @book = Book.new
-    if params[:create_at] == ""
-      @search_bok = "日付を選択して下しさい"
-    else
-      create_at = params[:create_at]
-      @search_book = @books.where(['created_at LIKE ? ', "#{create_at}%"]).count
-    end
+    create_at = params[:created_at]
+    @search_book = @books.where(['created_at LIKE ? ', "#{create_at}%"]).count
   end
 
   private

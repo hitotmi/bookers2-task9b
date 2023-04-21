@@ -9,25 +9,13 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
-      <%= form_with url: user_search_path(@user),method: :get do |f| %>
+      <%= form_with url: user_searches_path(@user),method: :get, local: false do |f| %>
         <%= f.date_field :created_at %>
         <%= f.submit "検索",class: "btn btn-info" %>
       <% end %>
       <div id="search_result">
         <% if @search_book.present? %>
-          <h2>検索結果</h2>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>投稿数</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= @search_book %></td>
-              </tr>
-            </tbody>
-          </table>
+          <%= render "searches", search_book: @search_book %>
         <% end %>
       </div>
     </div>
